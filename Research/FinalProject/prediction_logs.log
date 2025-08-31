@@ -1,0 +1,17 @@
+2025-06-23 09:31:42,206 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 09:36:39,063 - INFO - Prediction input: {'QueueStartDateNumber': 1, 'Interval': 9.5, 'IsHoliday': False, 'IsWeekend': False, 'IsWorkDay': True} | Result: 78.0
+2025-06-23 09:38:36,404 - INFO - Prediction input: {'QueueStartDateNumber': 1, 'Interval': 9.5, 'IsHoliday': False, 'IsWeekend': False, 'IsWorkDay': True} | Result: 78.0
+2025-06-23 09:43:38,060 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 09:43:39,566 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 15:06:20,942 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 15:13:12,492 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 15:15:21,231 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 15:24:19,121 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 15:24:52,410 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 15:26:22,726 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 15:27:54,256 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 15:27:57,224 - INFO - Prediction input: {'QueueStartDateNumber': 0, 'Interval': 8.0, 'IsHoliday': False, 'IsWeekend': False, 'IsWorkDay': True} | Result: 67.0
+2025-06-23 15:28:14,644 - INFO - Prediction input: {'QueueStartDateNumber': 0, 'Interval': 5.0, 'IsHoliday': False, 'IsWeekend': False, 'IsWorkDay': True} | Result: 1.0
+2025-06-23 15:28:20,979 - INFO - Prediction input: {'QueueStartDateNumber': 0, 'Interval': 15.0, 'IsHoliday': False, 'IsWeekend': False, 'IsWorkDay': True} | Result: 54.0
+2025-06-23 15:33:01,288 - INFO - Model loaded successfully from TotalAgentsModel.pkl
+2025-06-23 15:33:12,485 - INFO - Prediction input: {'QueueStartDateNumber': 0, 'Interval': 8.0, 'IsHoliday': False, 'IsWeekend': False, 'IsWorkDay': True} | Result: 67.0
