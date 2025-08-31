@@ -1,0 +1,10 @@
+# requirements.txt
+pandas
+scikit-learn
+streamlit
+joblib
+numpy
+plotly
+datetime
+warnings
+prophet
