@@ -5,6 +5,7 @@ numpy
 scikit-learn
 plotly
 joblib
+statsmodels
 
 # Prophet ותלויותיו
 prophet
