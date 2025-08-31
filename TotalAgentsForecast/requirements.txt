@@ -1,10 +1,12 @@
 # requirements.txt
-pandas
-scikit-learn
 streamlit
-joblib
+pandas
 numpy
+scikit-learn
 plotly
-datetime
-warnings
+joblib
+statsmodels
+
+# Prophet ותלויותיו
 prophet
+cmdstanpy
