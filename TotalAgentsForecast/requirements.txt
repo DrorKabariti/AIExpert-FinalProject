@@ -5,3 +5,7 @@ numpy<2.0
 scikit-learn==1.4.2
 plotly==5.22.0
 joblib==1.3.2
+
+# Prophet ותלויותיו
+prophet==1.1.2
+cmdstanpy==1.2.4
