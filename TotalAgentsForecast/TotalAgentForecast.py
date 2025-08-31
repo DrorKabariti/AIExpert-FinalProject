@@ -347,7 +347,7 @@ def evaluate_models(prophet_models, cc_file_buffer, holidays_file_buffer,
 # =============================================================================
 # Streamlit App UI
 # =============================================================================
-st.set_page_config(layout="wide", page_title="מערכת חיזוי נציגים – אכיפת כללים")
+st.set_page_config(layout="wide", page_title="יגים – אכיפת כללים")
 
 st.markdown("""
     <style>
@@ -369,7 +369,7 @@ page = st.sidebar.radio("בחר דף:", (
 
 if page == 'ℹ️ אודות':
     st.title("אודות מערכת החיזוי")
-    st.markdown("מערכת חיזוי כמות נציגים בחתך שעתי עם אכיפה קשיחה של כללי פעילות:")
+    st.markdown("עתי עם אכיפה קשיחה של כללי פעילות:")
     st.markdown("- **ימי חול (א׳-ה׳, א׳=Sunday)**: 07:00–19:00")
     st.markdown("- **שישי וערב חג**: 07:00–13:00")
     st.markdown("- **שבת חג**: תמיד 0")
