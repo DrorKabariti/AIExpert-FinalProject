@@ -687,10 +687,7 @@ elif page == '🧪 גרפים ומדדים':
 
 
 
-                st.subheader("Scatter: אמת מול חזוי")
-                fig4 = px.scatter(eval_df, x='y_true', y='y_pred', trendline='ols', title='פיזור אמת מול חזוי (כל האינטרוולים)',
-                                  labels={'y_true': 'אמת', 'y_pred': 'חזוי'})
-                st.plotly_chart(fig4, use_container_width=True)
+              
 
 
 
