@@ -13,7 +13,7 @@ from datetime import datetime
 import plotly.express as px
 import plotly.graph_objects as go
 
-from total_agent_core import (
+from TotalAgentsForeCastBackend import (
     load_model,predict_future,retrain_best_model,save_model,evaluate_models,
     WEEKDAY_START_DEFAULT,WEEKDAY_END_DEFAULT,FRIDAY_START_DEFAULT,FRIDAY_END_DEFAULT
 )
