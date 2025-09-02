@@ -14,7 +14,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 from TotalAgentsForeCastBackend import (
-    load_model,predict_future,retrain_best_model,save_model,evaluate_models,
+    load_model,predict_future,retrain_model,save_model,evaluate_models,
     WEEKDAY_START_DEFAULT,WEEKDAY_END_DEFAULT,FRIDAY_START_DEFAULT,FRIDAY_END_DEFAULT
 )
 
@@ -115,7 +115,7 @@ elif page == '⚙️ אימון מודל מחדש':
         if holidays_file_train and data_file:
             holidays_file_train.seek(0)
             data_file.seek(0)
-            trained_models = retrain_best_model(
+            trained_models = retrain_model(
                 cc_file_buffer=data_file,
                 holidays_file_buffer=holidays_file_train,
                 weekday_start=WEEKDAY_START_DEFAULT, weekday_end=WEEKDAY_END_DEFAULT,
@@ -193,9 +193,34 @@ elif page == '📘 פירוט פונקציות':
            """)
     st.markdown("---")
 
-    # 4) retrain_best_model
+    # 4) split_train_val_test
     with st.expander(
-            "⚙️ retrain_best_model(cc_file_buffer, holidays_file_buffer, weekday_start=7, weekday_end=19, friday_start=7, friday_end=13)"):
+            "🔎 split_train_val_test(df,date_col='Date')"):
+        st.markdown("""
+               **מטרה**: פיצול DataFrame ל Train, Validation and Test.  
+               **פרמטרים**:
+               - `df` — ה DataFrame המלא  
+               - `date_col` — שם העמודה המכילה תאריך  
+              
+               **מחזירה**:  
+               - `df_train: DataFrame` — Train  
+               - `df_val: DataFrame` — Validation
+               - `df_test: DataFrame` — Test
+               - `info` - {"train_end": train_end, "val_start": val_start, "val_end": val_end,
+                          "test_start": test_start, "max_date": max_date}
+                          
+               **הערות**:
+               
+                פיצול לפי:
+                - Train: StartDate till MaxDate-60 Days
+                - Validation : 30 Day after Train
+                - Test: MaxDate - 30 Days
+               """)
+    st.markdown("---")
+
+    # 5) retrain_model
+    with st.expander(
+            "⚙️ retrain_model(cc_file_buffer, holidays_file_buffer, weekday_start=7, weekday_end=19, friday_start=7, friday_end=13)"):
         st.markdown("""
            **מטרה**: אימון מודל **Prophet פר־אינטרוול (שעה)** על בסיס הדאטה המסונן; החזרת מילון מודלים.  
            **פרמטרים**: זהים ל־`run_full_eda`.  
@@ -208,7 +233,7 @@ elif page == '📘 פירוט פונקציות':
            """)
     st.markdown("---")
 
-    # 5) save_model
+    # 6) save_model
     with st.expander("💾 save_model(prophet_models, model_save_path)"):
         st.markdown("""
            **מטרה**: שמירת מילון המודלים לקובץ `pkl` באמצעות `joblib`.  
@@ -220,7 +245,7 @@ elif page == '📘 פירוט פונקציות':
            """)
     st.markdown("---")
 
-    # 6) load_model
+    # 7) load_model
     with st.expander("📂 load_model(model_file_buffer)"):
         st.markdown("""
            **מטרה**: טעינת מילון המודלים מקובץ `pkl` באמצעות `joblib`.  
@@ -230,7 +255,7 @@ elif page == '📘 פירוט פונקציות':
            """)
     st.markdown("---")
 
-    # 7) predict_future
+    # 8) predict_future
     with st.expander(
             "🔮 predict_future(prophet_models, future_dates, holidays_file_buffer, weekday_start=7, weekday_end=19, friday_start=7, friday_end=13)"):
         st.markdown("""
@@ -250,17 +275,6 @@ elif page == '📘 פירוט פונקציות':
 
            **הערות**:
            - עבור שבת/חג מחזירים שורות עם 0 לשמירת מבנה הטבלה.  
-           """)
-    st.markdown("---")
-
-    # 8) _safe_mape
-    with st.expander("🧮 _safe_mape(y_true: np.ndarray, y_pred: np.ndarray) -> float"):
-        st.markdown("""
-           **מטרה**: חישוב MAPE אמין (התעלמות מערכי אמת=0 כדי למנוע חלוקה באפס).  
-           **פרמטרים**:
-           - `y_true: ndarray`, `y_pred: ndarray`  
-
-           **מחזירה**: `float` (או `NaN` אם אין ערכי אמת חיוביים).  
            """)
     st.markdown("---")
 

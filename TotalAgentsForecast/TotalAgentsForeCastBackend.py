@@ -109,7 +109,40 @@ TUNED_PARAMS = {
 # ברירת מחדל אם חסר אינטרוול:
 TUNED_FALLBACK = {'mode': 'multiplicative', 'cps': 0.1, 'sps': 5.0, 'hps': 5.0}
 
-def retrain_best_model(cc_file_buffer, holidays_file_buffer,
+def split_train_val_test(df, date_col="Date"):
+    """
+    פיצול לפי:
+    - Train: עד (max_date - 60 ימים)
+    - Val: 30 ימים אחרי ה־Train
+    - Test: 30 ימים אחרונים עד max_date
+    """
+    df = df.copy()
+    df[date_col] = pd.to_datetime(df[date_col])
+    max_date = df[date_col].max().normalize()
+
+    # גבולות
+    test_start = max_date - pd.Timedelta(days=29)   # 30 ימים אחרונים כולל max_date
+    val_end = test_start - pd.Timedelta(days=1)
+    val_start = val_end - pd.Timedelta(days=29)     # 30 ימים לפני ה־Test
+    train_end = val_start - pd.Timedelta(days=1)
+
+    # מסכות
+    train_mask = df[date_col] <= train_end
+    val_mask = (df[date_col] >= val_start) & (df[date_col] <= val_end)
+    test_mask = df[date_col] >= test_start
+
+    df_train = df[train_mask].copy()
+    df_val = df[val_mask].copy()
+    df_test = df[test_mask].copy()
+
+    return df_train, df_val, df_test, {
+        "train_end": train_end, "val_start": val_start, "val_end": val_end,
+        "test_start": test_start, "max_date": max_date
+    }
+
+
+
+def retrain_model(cc_file_buffer, holidays_file_buffer,
                        weekday_start: int = WEEKDAY_START_DEFAULT, weekday_end: int = WEEKDAY_END_DEFAULT,
                        friday_start: int = FRIDAY_START_DEFAULT, friday_end: int = FRIDAY_END_DEFAULT):
     # הכנת דאטה עם כללי פעילות
@@ -119,6 +152,9 @@ def retrain_best_model(cc_file_buffer, holidays_file_buffer,
     )
 
     df = cc_df[['Date', 'Interval', 'TotalAgents']].copy()
+
+    max_date = df["Date"].max().normalize()
+    df_train, df_val, df_test, info = split_train_val_test(df, date_col="Date")
 
     # טבלת חגים ל-Prophet
     holidays_df = holidays_df_orig.rename(columns={'Date': 'ds', 'HolidayName': 'holiday'})
