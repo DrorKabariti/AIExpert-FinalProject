@@ -355,25 +355,24 @@ elif page == '🧪 גרפים ומדדים':
                 k1, k2, k3, k4 = st.columns(4)
                 k1.metric("MAE", overall.get('MAE'))
                 k2.metric("RMSE", overall.get('RMSE'))
-                #k3.metric("MAPE %", overall.get('MAPE_%') if overall.get('MAPE_%') is not None else "N/A")
-                k3.metric("MAPE %", "3.25")
+                k3.metric("MAPE %", overall.get('MAPE_%') if overall.get('MAPE_%') is not None else "N/A")
                 k4.metric("R²", overall.get('R2'))
 
                 # --- Per-interval metrics table ---
-                #st.subheader("מדדים לפי אינטרוול")
-                #st.dataframe(per_interval_df, use_container_width=True)
+                st.subheader("מדדים לפי אינטרוול")
+                st.dataframe(per_interval_df, use_container_width=True)
 
                 # --- Charts ---
                 st.subheader("Actual vs. Predicted – סיכום יומי")
-                daily = eval_df.groupby('Date', as_index=False).agg(y_true=('y_true', 'max'),
-                                                                    y_pred=('y_pred', 'max'))
+                daily = eval_df.groupby('Date', as_index=False).agg(y_true=('y_true', 'sum'),
+                                                                    y_pred=('y_pred', 'sum'))
                 daily['Date_str'] = daily['Date'].dt.strftime('%d/%m/%Y')
                 fig1 = go.Figure()
                 fig1.add_trace(go.Scatter(x=daily['Date_str'], y=daily['y_true'], mode='lines+markers', name='Actual'))
                 fig1.add_trace(
                     go.Scatter(x=daily['Date_str'], y=daily['y_pred'], mode='lines+markers', name='Predicted'))
-                fig1.update_layout(title="", xaxis_title="תאריך",
-                                   yaxis_title="נציגים")
+                fig1.update_layout(title="כמות נציגים – אמת מול חזוי (סה\"כ יומי)", xaxis_title="תאריך",
+                                   yaxis_title="סה\"כ נציגים")
                 st.plotly_chart(fig1, use_container_width=True)
 
 
