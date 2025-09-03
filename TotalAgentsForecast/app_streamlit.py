@@ -354,10 +354,9 @@ elif page == '🧪 גרפים ומדדים':
                 # --- KPIs ---
                 k1, k2, k3, k4 = st.columns(4)
                 k1.metric("MAE", overall.get('MAE'))
-                k2.metric("RMSE", overall.get('RMSE'))
-                #k3.metric("MAPE %", overall.get('MAPE_%') if overall.get('MAPE_%') is not None else "N/A")
-                k3.metric("MAPE %", "3.25")
-                k4.metric("R²", overall.get('R2'))
+                k2.metric("RMSE", overall.get('RMSE'))                
+                k3.metric("R²", overall.get('R2'))
+                #k4.metric("MAPE %", overall.get('MAPE_%') if overall.get('MAPE_%') is not None else "N/A")
 
                 # --- Per-interval metrics table ---
                 #st.subheader("מדדים לפי אינטרוול")
