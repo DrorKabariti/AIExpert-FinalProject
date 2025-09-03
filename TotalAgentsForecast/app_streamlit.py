@@ -365,8 +365,8 @@ elif page == '🧪 גרפים ומדדים':
 
                 # --- Charts ---
                 st.subheader("Actual vs. Predicted – סיכום יומי")
-                daily = eval_df.groupby('Date', as_index=False).agg(y_true=('y_true', 'max'),
-                                                                    y_pred=('y_pred', 'max'))
+                daily = eval_df.groupby('Date', as_index=False).agg(y_true=('y_true', 'sum'),
+                                                                    y_pred=('y_pred', 'sum'))
                 daily['Date_str'] = daily['Date'].dt.strftime('%d/%m/%Y')
                 fig1 = go.Figure()
                 fig1.add_trace(go.Scatter(x=daily['Date_str'], y=daily['y_true'], mode='lines+markers', name='Actual'))
